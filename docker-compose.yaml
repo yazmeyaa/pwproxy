@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  haproxy:
+    image: haproxy:2.9
+    container_name: haproxy
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "443:443"
+    restart: unless-stopped
+
+  coredns:
+    image: coredns/coredns:latest
+    container_name: coredns
+    command: -conf /Corefile
+    volumes:
+      - ./coredns/Corefile:/Corefile:ro
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    restart: unless-stopped
+
