@@ -8,14 +8,11 @@ services:
       - "443:443"
     restart: unless-stopped
 
-  coredns:
-    image: coredns/coredns:latest
-    container_name: coredns
-    command: -conf /Corefile
-    volumes:
-      - ./coredns/Corefile:/Corefile:ro
-    ports:
-      - "217.30.10.72:53:53/udp"
-      - "217.30.10.72:53:53/tcp"
-    restart: unless-stopped
-
+coredns:
+  image: coredns/coredns:latest
+  container_name: coredns
+  command: -conf /Corefile
+  volumes:
+    - ./coredns/Corefile:/Corefile:ro
+  network_mode: "host"
+  restart: unless-stopped
