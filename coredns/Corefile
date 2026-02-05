@@ -1,4 +1,4 @@
-.:53 {
+0.0.0.0:53 {
     hosts {
         217.30.10.72 pw.game
         217.30.10.72 ns.photonengine.io
