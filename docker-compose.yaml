@@ -8,11 +8,11 @@ services:
       - "443:443"
     restart: unless-stopped
 
-coredns:
-  image: coredns/coredns:latest
-  container_name: coredns
-  command: -conf /Corefile
-  volumes:
-    - ./coredns/Corefile:/Corefile:ro
-  network_mode: "host"
-  restart: unless-stopped
+  coredns:
+    image: coredns/coredns:latest
+    container_name: coredns
+    command: -conf /Corefile
+    volumes:
+      - ./coredns/Corefile:/Corefile:ro
+    network_mode: "host"
+    restart: unless-stopped
