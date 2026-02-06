@@ -1,7 +1,17 @@
+.:53 {
+    hosts {
+        217.30.10.72 pw.game
+        217.30.10.72 ns.photonengine.io
+        fallthrough
+    }
 
+    forward . 1.1.1.1
+    cache 30
+}
 
 https://pwproxy.magic-lizard.ru {
-    tls /etc/letsencrypt/live/pwproxy.magic-lizard.ru/fullchain.pem
+    tls /etc/letsencrypt/live/pwproxy.magic-lizard.ru/fullchain.pem \
+        /etc/letsencrypt/live/pwproxy.magic-lizard.ru/privkey.pem
 
     hosts {
         217.30.10.72 pw.game
@@ -15,7 +25,8 @@ https://pwproxy.magic-lizard.ru {
 }
 
 .:853 {
-    tls /etc/letsencrypt/live/pwproxy.magic-lizard.ru/fullchain.pem
+    tls /etc/letsencrypt/live/pwproxy.magic-lizard.ru/fullchain.pem \
+        /etc/letsencrypt/live/pwproxy.magic-lizard.ru/privkey.pem
 
     hosts {
         217.30.10.72 pw.game
