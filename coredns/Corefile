@@ -10,8 +10,8 @@
 }
 
 https://pwproxy.magic-lizard.ru {
-    tls /etc/letsencrypt/live/pwproxy.magic-lizard.ru/fullchain.pem \
-        /etc/letsencrypt/live/pwproxy.magic-lizard.ru/privkey.pem
+    tls /certs/fullchain.pem /certs/privkey.pem
+
 
     hosts {
         217.30.10.72 pw.game
@@ -25,8 +25,7 @@ https://pwproxy.magic-lizard.ru {
 }
 
 .:853 {
-    tls /etc/letsencrypt/live/pwproxy.magic-lizard.ru/fullchain.pem \
-        /etc/letsencrypt/live/pwproxy.magic-lizard.ru/privkey.pem
+    tls /certs/fullchain.pem /certs/privkey.pem
 
     hosts {
         217.30.10.72 pw.game
