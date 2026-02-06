@@ -4,6 +4,8 @@ services:
     container_name: haproxy
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "443:443"
     restart: unless-stopped
 
   coredns:
@@ -14,7 +16,6 @@ services:
       - ./coredns/Corefile:/Corefile:ro
       - ./coredns/certs:/certs:ro
     ports:
-      - "443:443"
       - "853:853/tcp"
       - "53:53/tcp"
       - "53:53/udp"
