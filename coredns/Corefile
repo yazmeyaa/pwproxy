@@ -9,9 +9,8 @@
     cache 30
 }
 
-https://pwproxy.magic-lizard.ru {
+https://.:443 {
     tls /certs/fullchain.pem /certs/privkey.pem
-
 
     hosts {
         217.30.10.72 pw.game
