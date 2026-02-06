@@ -19,5 +19,4 @@ services:
       - "853:853/tcp"
       - "53:53/tcp"
       - "53:53/udp"
-    network_mode: bridge
     restart: unless-stopped
