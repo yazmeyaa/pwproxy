@@ -14,8 +14,12 @@ services:
     command: -conf /Corefile
     volumes:
       - ./coredns/Corefile:/Corefile:ro
+      - ./coredns/certs:/certs:ro
     ports:
         - "53:53/tcp"
         - "53:53/udp"
+        - "853:853/tcp"
+        - "853:853/udp"
+        - "443:443"
     network_mode: bridge
     restart: unless-stopped
