@@ -1,11 +1,29 @@
-.:53 {
+
+
+https://pwproxy.magic-lizard.ru {
+    tls /etc/letsencrypt/live/pwproxy.magic-lizard.ru/fullchain.pem
+
     hosts {
         217.30.10.72 pw.game
         217.30.10.72 ns.photonengine.io
         fallthrough
     }
 
-    forward . 1.1.1.1
+    forward . tls://1.1.1.1
+    cache 30
+    log
+}
+
+.:853 {
+    tls /etc/letsencrypt/live/pwproxy.magic-lizard.ru/fullchain.pem
+
+    hosts {
+        217.30.10.72 pw.game
+        217.30.10.72 ns.photonengine.io
+        fallthrough
+    }
+
+    forward . tls://1.1.1.1
     cache 30
     log
 }
