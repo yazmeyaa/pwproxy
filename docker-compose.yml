@@ -8,9 +8,12 @@ services:
     command: -conf /etc/coredns/Corefile
     volumes:
       - ./coredns/Corefile:/etc/coredns/Corefile:ro
+      - ./certs:/certs:ro
     ports:
       - "53:53/udp"
       - "53:53/tcp"
+      - "853:853/tcp"
+      - "8443:8443/tcp"
     networks:
       proxynet:
         ipv4_address: 172.20.0.2
