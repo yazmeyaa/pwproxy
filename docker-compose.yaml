@@ -17,6 +17,6 @@ services:
       - ./coredns/certs:/certs:ro
     ports:
       - "853:853/tcp"
-      - "53:53/tcp"
-      - "53:53/udp"
+      - "5333:53/tcp"
+      - "5333:53/udp"
     restart: unless-stopped
