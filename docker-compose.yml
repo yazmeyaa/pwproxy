@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  coredns:
+    image: coredns/coredns:latest
+    container_name: coredns
+    restart: unless-stopped
+    command: -conf /etc/coredns/Corefile
+    volumes:
+      - ./coredns/Corefile:/etc/coredns/Corefile:ro
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    networks:
+      proxynet:
+        ipv4_address: 172.20.0.2
+
+  haproxy:
+    image: haproxy:lts-alpine
+    container_name: haproxy
+    restart: unless-stopped
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "443:443/tcp"
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    networks:
+      proxynet:
+        ipv4_address: 172.20.0.10
+    depends_on:
+      - coredns
+
+networks:
+  proxynet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
