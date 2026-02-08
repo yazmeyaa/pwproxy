@@ -1,13 +1,17 @@
-# Shared interception logic — imported by each protocol block below.
-(intercept) {
+# Exact domains — authoritative, no forward.
+# HTTPS/SVCB queries return NODATA, blocking ECH key discovery.
+(exact) {
     log
-
     hosts {
         217.30.10.72 pw.game ns.photonengine.io
         ttl 60
         no_reverse
-        fallthrough
     }
+}
+
+# Wildcards + catch-all — with forward for unmatched queries.
+(wildcard_and_catchall) {
+    log
 
     # *.exitgames.com
     template IN A exitgames.com {
@@ -39,18 +43,29 @@
 }
 
 # Plain DNS
+pw.game ns.photonengine.io {
+    import exact
+}
 . {
-    import intercept
+    import wildcard_and_catchall
 }
 
 # DoT
+tls://pw.game tls://ns.photonengine.io {
+    tls /certs/cert.pem /certs/key.pem
+    import exact
+}
 tls://. {
     tls /certs/cert.pem /certs/key.pem
-    import intercept
+    import wildcard_and_catchall
 }
 
-# DoH (port 8443 — 443 is used by HAProxy)
+# DoH
+https://pw.game:8443 https://ns.photonengine.io:8443 {
+    tls /certs/cert.pem /certs/key.pem
+    import exact
+}
 https://.:8443 {
     tls /certs/cert.pem /certs/key.pem
-    import intercept
+    import wildcard_and_catchall
 }
